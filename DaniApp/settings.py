@@ -136,5 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "WorkoutApp.User"
 LOGIN_URL = 'login/'
 CSRF_TRUSTED_ORIGINS = [
-    "*",
+        "https://*.awsapprunner.com",
+        "https://*.127.0.0.1",
+        "https://ey3arzwnt8.us-west-2.awsapprunner.com",
 ]
