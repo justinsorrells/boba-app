@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid my-3">
+    <h1>Create New Program</h1>
+    <hr>
+    <div class="row">
+        <div class="bg-body col-4 h-25 sticky-top" id="exerciseForm">
+            <div class="mb-1">
+                <label class="form-label" for="exercise">Exercise</label>
+                <select class="form-control" id="exercise" name="exercise">
+                    {% for exercise in exercises %}
+                        <option>{{ exercise.exercise_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-primary my-3" id="addToWorkout">Add To Workout</button>
+            <div class="my-1" id="currentWorkout">
+                <h1>Current Workout</h1>
+            </div>
+                <div class="d-grid gap-2 col-6 ms-0">
+                    <button class="btn btn-primary btn-block m-2" id="assignCurrentWorkout">Finish Workout</button>
+                    <button class="btn btn-primary btn-block m-2" id="addDay">Add Day</button>
+                    <button class="btn btn-primary btn-block m-2" id="addWeek">Add Week</button>
+                    <button class="btn btn-primary btn-block m-2" id="assignProgram">Finalize Program</button>
+                </div>
+        </div>
+        <div class="col-8" id="program">
+        </div>
+    </div>
+</div> 
+    <script src="{% static 'WorkoutApp/Workout.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_superuser %}
+        <form action="{% url 'exercises_view' %}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <input type="submit" value="submit">
+        </form>
+    {% endif %}
+    <ul>
+    {% for exercise in exercises %}
+        <li>{{ exercise.exercise_name }}</li>
+    {% empty %}
+        <li>Error loading exercises...</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

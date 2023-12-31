@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {{ program|json_script:"program_details"}}
+    <div class="container">
+        <div class="mb-3" id="program"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col col-lg-6 text-center">
+                    <search>
+                        <form class="mx-auto">
+                            <div class="mb-3 text-center">
+                                <label class="form-label" for="client">Search Clients</label>
+                                <input class="form-input" type="search" id="client" name="q">
+                            </div>
+                        </form>
+                    </search>
+                    <div id="listOfNames"></div>
+                </div>
+                <div class="col col-lg-6 text-center">
+                    <h3 class="border-bottom">Selected Clients</h3>
+                    <div id="listOfSelectedNames"></div>
+                </div>
+            <div class="container">
+                <button class="btn btn-primary d-block mx-auto" id="assignProgramToClient">Assign Program</button>
+            </div>
+            </div>
+        </div>
+    </div> 
+    <script src="{% static 'WorkoutApp/Workout.js' %}"></script>
+    <script>
+        const listOfNames = document.querySelector("#listOfNames");
+        const listOfSelectedNames = document.querySelector("#listOfSelectedNames");
+        let selectedClients = new Set();
+
+        function addNameToList(name, element)
+        {
+            let row = createRow(name);
+            element.append(row);
+        } 
+        
+        function assignProgram()
+        {
+            let CSRF = getCookie("csrftoken");
+            fetch(window.location.href, {
+                "method" : "post",
+                "headers" : {
+                    "X-CSRFToken" : CSRF,
+                    "content-type" : "application/json", 
+                },
+                "body" : JSON.stringify([...selectedClients]),
+            });
+        }
+
+        function clearList(element)
+        {
+            element.innerHTML = "";
+        }
+
+        function createRow(name)
+        {
+            let row = document.createElement("div");
+            let rowParagraph = document.createElement("p");
+            let rowText = document.createTextNode(name);
+            rowParagraph.append(rowText);
+            row.append(rowParagraph); 
+            return row;
+        }
+
+        function getCookie(name)
+        {
+            let cookies = document.cookie;
+            cookies = cookies.split('=');
+            for (let i = 0; i < cookies.length; i++)
+            {
+                if (cookies[i] === name) return cookies[i+1];
+            }
+            return null;
+        }
+
+        async function submitSearch(name, element)
+        {
+            if (name == "") {
+                clearList(element);
+                return ;
+            }
+            try {
+                fetch(`http://127.0.0.1:8000/client_search/${name}`)
+                .then((response) => {
+                    response.json()
+                    .then((text) => {
+                        clearList(listOfNames);
+                        updateList(text, listOfNames);
+                    }); 
+                })
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function updateList(list, element)
+        {
+            for (const name of list)
+            {
+                addNameToList(name, element);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            document.querySelector('#client').addEventListener('keyup', (e) => {
+                submitSearch(e.target.value, listOfNames);
+            });
+            listOfNames.addEventListener('click', (e) => {
+                selectedClients.add(e.target.textContent);
+                clearList(listOfSelectedNames);
+                updateList(selectedClients, listOfSelectedNames);
+            });
+            document.querySelector('#assignProgramToClient').addEventListener('click', (e) => {
+                assignProgram();
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{{ workout|json_script:"program_details"}}
+<h1>Workouts</h1>
+<hr>
+    <div>
+        <h3>Notes</h3>
+        <p>{{ notes }}</p>
+        <div class="mb-3" id="program"></div>
+    </div>
+    <script src="{% static 'WorkoutApp/RenderUserWorkout.js' %}"></script>
+{% endblock %}
