@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-s*52-n@#_c1evjl*n!8dggziu2p(il8jh3w7+mf$n5uw!%91=*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-	".awsapprunner.com",
+	"*.awsapprunner.com",
 	"127.0.0.1",
+    "https://ey3arzwnt8.us-west-2.awsapprunner.com",
 ]
 
 
@@ -136,4 +137,4 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "WorkoutApp.User"
 LOGIN_URL = 'login/'
-CSRF_TRUSTED_ORIGINS = ['https://*awsapprunner.com', 'https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*awsapprunner.com', 'https://*.127.0.0.1', 'https://ey3arzwnt8.us-west-2.awsapprunner.com']
