@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'DaniApp.wsgi.application'
 
 if "DATABASE_SECRET" in environ:
     database_secret = environ.get("DATABASE_URL")
-    if database_secret not None:
+    if database_secret != None:
         db_url = json.loads(database_secret)["DATABASE_URL"]
         DATABASES = {"default": dj_database_url.parse("postgres://django:Simba420%21@django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com/django")}
 else:
