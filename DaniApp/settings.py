@@ -88,7 +88,12 @@ WSGI_APPLICATION = 'DaniApp.wsgi.application'
 #        db_url = json.loads(database_secret)["DATABASE_URL"]
 DATABASES = {
     "default": {
-        dj_database_url.config(default="postgres://django:Simba420%21@django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com/django",conn_max_age=600,conn_health_checks=True)
+        "ENGINE" : "django.db.backends.postgresql",
+        "NAME" : "django", 
+        "USER" : "django",
+        "PASSWORD" : "Simba420!",
+        "HOST" : "django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com",
+        "PORT" : "5432",
     }
 }
 #else:
