@@ -80,12 +80,13 @@
 
         async function submitSearch(name, element)
         {
+            let url = window.location.origin;
             if (name == "") {
                 clearList(element);
                 return ;
             }
             try {
-                fetch(`http://127.0.0.1:8000/client_search/${name}`)
+                fetch(`${url}/client_search/${name}`)
                 .then((response) => {
                     response.json()
                     .then((text) => {
