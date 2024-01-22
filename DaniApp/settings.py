@@ -90,8 +90,8 @@ DATABASES = {
     "default": {
         "ENGINE" : "django.db.backends.postgresql",
         "NAME" : "django", 
-        "USER" : "django",
-        "PASSWORD" : "Simba420!",
+        "USER" : "justin",
+        "PASSWORD" : "justin",
         "HOST" : "django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com",
         "PORT" : "5432",
     }
