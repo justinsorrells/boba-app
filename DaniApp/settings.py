@@ -82,13 +82,19 @@ WSGI_APPLICATION = 'DaniApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if "DATABASE_URL" in environ:
-    database_secret = environ.get("DATABASE_URL")
-    if database_secret != None:
-        db_url = json.loads(database_secret)["DATABASE_URL"]
-        DATABASES = {"default": dj_database_url.parse("postgres://django:Simba420%21@django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com/django")}
-else:
-	DATABASES = {"default": dj_database_url.parse("sqlite:///db.sqlite3")}
+#if "DATABASE_URL" in environ:
+#    database_secret = environ.get("DATABASE_URL")
+#    if database_secret != None:
+#        db_url = json.loads(database_secret)["DATABASE_URL"]
+DATABASES = {
+    "default": dj_database_url.parse(
+        "postgres://django:Simba420%21@django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com/django",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
+#else:
+#	DATABASES = {"default": dj_database_url.parse("sqlite:///db.sqlite3")}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
