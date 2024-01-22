@@ -87,8 +87,8 @@ WSGI_APPLICATION = 'DaniApp.wsgi.application'
 #    if database_secret != None:
 #        db_url = json.loads(database_secret)["DATABASE_URL"]
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgres://django:Simba420%21@django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com/django",
+    "default": dj_database_url.config(
+        default="postgres://django:Simba420%21@django-apprunner-db.cj4g2qkasxe7.us-west-2.rds.amazonaws.com/django",
         conn_max_age=600,
         conn_health_checks=True,
     )
