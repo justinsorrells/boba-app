@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'DaniApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if "DATABASE_SECRET" in environ:
+if "DATABASE_URL" in environ:
     database_secret = environ.get("DATABASE_URL")
     if database_secret != None:
         db_url = json.loads(database_secret)["DATABASE_URL"]
