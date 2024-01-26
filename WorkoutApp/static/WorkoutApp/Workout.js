@@ -108,6 +108,9 @@ function setAssignProgramEvent()
     const assignProgramButton = document.querySelector("#assignProgram");
     if (assignProgramButton)
     {
+        let data = {};
+        data["workouts"] = { ...workouts };
+        data["name"] = document.querySelector("#programName").value;
         assignProgramButton.addEventListener('click', () => {
             let url = window.location.href;
             let csrf = getCookie('csrftoken');
@@ -119,7 +122,7 @@ function setAssignProgramEvent()
                     "Content-Type": 'application/json',
                     "X-CSRFToken": csrf,
                 },
-                body: JSON.stringify(workouts),
+                body: JSON.stringify(data),
             });
         })
     }
@@ -486,7 +489,6 @@ window.addEventListener('load', () => {
     } catch (e) {
         console.error(e);
     }
-    console.log(workouts);
     displayWorkouts();
     const body = document.querySelector('body');
     body.addEventListener("keyup", (e) => {

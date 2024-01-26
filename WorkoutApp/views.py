@@ -39,7 +39,7 @@ def create_program(request):
         return HttpResponseRedirect(reverse('index'))
     if request.method == "POST":
         serialized_body = json.loads(request.body)
-        Program.objects.create(program_name="New Program", program=serialized_body)
+        Program.objects.create(program_name=serialized_body["name"], program=serialized_body["workouts"])
     context = {}
     exercises = Exercise.objects.all()
     context['exercises'] = exercises
